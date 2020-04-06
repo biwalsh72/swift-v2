@@ -4,8 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "server": "cd server && mvn spring-boot:run",
-    "chat": "nodemon chat-server/server.js",
+    "server": "nodemon swift-server/index.js",
     "dev": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"

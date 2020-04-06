@@ -1,0 +1,28 @@
+.conversationsList {
+  display: flex;
+  flex-direction: column;
+  background: rgb(226, 226, 226);
+  overflow-y: auto;
+  z-index: 1;
+  flex-grow: 1;
+}
+
+.conversationEntryContent {
+  height: 66px;
+  border-bottom: 1px solid darkgrey;
+  cursor: pointer;
+  display: table;
+  width: 100%;
+}
+
+.conversationEntryName {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: 600;
+}
+
+.defaultUser {
+  visibility: hidden;
+}

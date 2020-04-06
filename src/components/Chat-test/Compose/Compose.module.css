@@ -1,0 +1,49 @@
+.compose {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  background: rgb(189, 189, 189);
+  border-top: 1px solid #eeeef1;
+  position: fixed;
+  width: calc(100% - 20px);
+  bottom: 0;
+}
+
+@supports (backdrop-filter: blur(20px)) {
+  .compose {
+    border: none;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+  }
+}
+
+.composeInput {
+  flex: 1;
+  border: none;
+  font-size: 14px;
+  height: 40px;
+  background: none;
+  width: 100%;
+  backdrop-filter: blur(80px);
+  background: rgb(245, 245, 245);
+  border-radius: 20px;
+}
+
+.composeForm {
+  width: 70%;
+  border-radius: 20px;
+}
+
+.composeInput::placeholder {
+  opacity: .6;
+  color: darkgrey;
+}
+
+.compose .toolbar-button {
+  color: #bbbbbf;
+  margin-left: 15px;
+}
+
+.compose .toolbar-button:hover {
+  color: #99999c;
+}

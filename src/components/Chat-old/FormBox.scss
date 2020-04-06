@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+body,
+html {
+  font-family: Roboto, sans-serif;
+  color: black;
+}
+
+::placeholder {
+  font-family: Roboto, sans-serif;
+  color: rgb(129, 129, 129);
+}
+
+.formBoxWrapper {
+  width: 100%;
+  height: 5vh;
+  border-radius: 4px;
+  background: transparent;
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 1rem;
+}
+
+.messageInput {
+  outline: none !important;
+  border: none;
+  background: white;
+  border-radius: 4px;
+  font-size: 2vh;
+  height: 4vh;
+  resize: none;
+  width: 95.5%;
+  margin-left: 1.5%;
+  vertical-align: middle;
+  position: absolute;
+  bottom: 0;
+  line-height: 2;
+  margin-bottom: 1rem;
+  font-family: Roboto, sans-serif;
+  color: black;
+  padding-left: 0.5rem;
+  overflow: hidden;
+}

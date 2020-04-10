@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server/index.js",
-    "server": "nodemon swift-server/index.js",
+    "server": "node swift-server/index.js",
     "dev": "webpack-dev-server --open --mode development",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.9.0",
+    "@babel/plugin-transform-runtime": "^7.9.0",
     "@babel/preset-env": "^7.9.0",
     "@babel/preset-react": "^7.9.4",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
@@ -21,9 +22,10 @@
     "babel-loader": "^8.1.0",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
-    "config": "^3.3.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "cryptico": "^1.0.2",
+    "crypto-js": "^4.0.0",
     "express": "^4.17.1",
     "express-mysql-session": "^2.1.4",
     "express-session": "^1.17.0",
@@ -35,6 +37,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "mongoose": "^5.9.7",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "node-sass": "^4.13.1",

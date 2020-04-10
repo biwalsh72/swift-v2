@@ -89,14 +89,18 @@ router.post('/', [auth], async (req, res) => {
 })
 
 async function deleteChatsOnChannel (channel) {
-  const chats = await Chat.find({ channel }).sort({ _id: 1 })
-  const limit = channel === 'global' ? 100 : 10
-  chats.splice(-limit)
-  for (chat of chats) {
-    await Chat.findByIdAndDelete(chat._id)
-  }
+  try {
+    const chats = await Chat.find({ channel }).sort({ _id: 1 })
+    const limit = channel === 'global' ? 100 : 10
+    chats.splice(-limit)
+    for (chat of chats) {
+      await Chat.findByIdAndDelete(chat._id)
+    }
 
-  console.log('DeleteChatsOnChannel: ' + channel)
+    console.log('DeleteChatsOnChannel: ' + channel)
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 module.exports = router

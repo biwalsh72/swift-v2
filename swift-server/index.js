@@ -4,7 +4,7 @@ const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
 const cors = require('cors')
-const config = require('config')
+const config = require('./config.json')
 const morgan = require('morgan')
 const server = require('http').Server(app)
 const socket = require('socket.io')(server)
@@ -18,7 +18,7 @@ app.use(cors())
 const socketConnection = require('./socket')
 mongoose
   .connect(
-    config.get('MONGODB_URI'),
+    config['MONGODB_URI'],
     {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -40,10 +40,10 @@ app.use('/api/users', user)
 app.use('/api/chats', chat)
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'))
+  app.use(express.static('dist'))
 
   app.use('*', (req, res) =>
-    res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
+    res.sendFile(path.join(__dirname, 'src', 'build', 'index.html'))
   )
 }
 

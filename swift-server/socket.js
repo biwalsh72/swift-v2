@@ -15,8 +15,10 @@ const socket = socket => {
       { useFindAndModify: false }
     )
 
+    if (user != null) {
     console.log('user-disconnect: ', user.username)
     socket.broadcast.emit('user-disconnected', user)
+    }
   })
 
   socket.on('user-offline', async () => {
@@ -25,9 +27,10 @@ const socket = socket => {
       { status: '' },
       { useFindAndModify: false }
     )
-
+    if (user != null) {
     console.log('user-disconnect: ', user.username)
     socket.broadcast.emit('user-disconnected', user)
+    }
   })
 
   socket.on('broadcast-message', async msgObj => {

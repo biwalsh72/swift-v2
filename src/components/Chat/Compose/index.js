@@ -19,7 +19,7 @@ export default class Compose extends Component {
 
   handleSubmit (e) {
     e.preventDefault();
-    console.log(this.state.message);
+    if (message.trim() === "") return;
     this.setState({ message: '' });
   }
 
@@ -31,6 +31,9 @@ export default class Compose extends Component {
             type='text'
             className={styles.composeInput}
             placeholder={`Type a message, ${this.props.currentUser.name}`}
+            maxLength="500"
+            autoFocus
+            required
             onChange={this.handleChange}
             value={this.state.message}
           />

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Joi = require('joi')
 const jwt = require('jsonwebtoken')
-const config = require('config')
+const config = require('../config.json')
 
 // create schema for users added to users collection
 const userSchema = mongoose.Schema({
@@ -16,7 +16,7 @@ const userSchema = mongoose.Schema({
     maxLength: 25,
     default: '...'
   },
-  password: {
+  auth: {
     type: String,
     require: true
   },
@@ -41,7 +41,7 @@ const userSchema = mongoose.Schema({
 const User = mongoose.model('User', userSchema)
 
 const generateToken = auth => {
-  return jwt.sign({ auth }, config.get('jwtKey'))
+  return jwt.sign({ auth }, config['jwtKey'])
 }
 
 const validate = user => {
@@ -53,7 +53,7 @@ const validate = user => {
     bio: Joi.string()
       .default('...')
       .max(25),
-    password: Joi.string().required(),
+    auth: Joi.string().required(),
     salt: Joi.string(),
     privateKeyCipher: Joi.string(),
     publicKey: Joi.string(),

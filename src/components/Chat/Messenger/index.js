@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import ConversationList from '../ConversationList'
 import MessageList from '../MessageList'
 import styles from './Messenger.module.css'
@@ -6,6 +7,10 @@ import openSocket from 'socket.io-client'
 import Toolbar from '../Toolbar'
 import ToolbarButton from '../ToolbarButton'
 import { cog } from 'ionicons/icons'
+import Axios from 'axios'
+import crypto from 'crypto'
+import { MD5 } from 'crypto-js'
+import { getUserProfile, updateUser } from '../../../services/userService'
 
 const socket = openSocket(
   process.env.REACT_APP_SOCKET_ENDPOINT || 'http://localhost:4000'
@@ -15,7 +20,6 @@ const Messenger = ({ history, location }) => {
   const [user, setUser] = useState({})
   const [channel, setChannel] = useState('global')
   const [isOnline, setIsOnline] = useState(true)
-  const [navOpen, setNavOpen] = useState(false)
 
   const userECDH = getECDH()
 
@@ -39,7 +43,6 @@ const Messenger = ({ history, location }) => {
 
     getUser()
 
-    history.push('/chat/search')
     return () => {
       source.cancel()
       socket.disconnect()
@@ -86,14 +89,10 @@ const Messenger = ({ history, location }) => {
 
   function getECDH () {
     const pvkStr = localStorage.getItem('pvk')
-
     const pvkParse = JSON.parse(pvkStr)
-
     const pvk = Buffer.from(pvkParse.data)
-
     const ecdh = crypto.createECDH('secp521r1')
     ecdh.setPrivateKey(pvk)
-
     return ecdh
   }
 
@@ -120,10 +119,6 @@ const Messenger = ({ history, location }) => {
     }
   }
 
-  function flipOpenNav (boolean = !navOpen) {
-    setNavOpen(boolean)
-  }
-
   function handleChannelOpen (currUser, user) {
     const channelId = getChannelId(currUser, user)
 
@@ -131,7 +126,6 @@ const Messenger = ({ history, location }) => {
     localStorage.setItem('chatmate', user.username)
 
     setChannel(channelId)
-    flipOpenNav(false)
 
     history.push('/chat/ch/' + channelId)
   }
@@ -168,40 +162,34 @@ const Messenger = ({ history, location }) => {
           ]}
         /> */}
 
-        <Switch>
           <div className={[styles['scrollable'], styles['sidebar']].join(' ')}>
-            <Route
-              path='/chat/search'
-              render={props => (
-                <ConversationsList
-                  {...props}
-                  user={user}
-                  socket={socket}
-                  handleChannelOpen={handleChannelOpen}
-                />
-              )}
+            <ConversationList
+              user={user}
+              socket={socket}
+              handleChannelOpen={handleChannelOpen}
             />
           </div>
 
           <div className={[styles['scrollable'], styles['content']].join(' ')}>
-            <Route
-              path='/chat/ch/:channel'
-              render={props => (
-                <MessageList
-                  {...props}
-                  socket={socket}
-                  user={user}
-                  channel={channel}
-                  getPassphrase={getPassphrase}
-                  handleChannelOpen={handleChannelOpen}
-                />
-              )}
+          <Switch>
+          <Route path='/chat/ch/:channel'
+          render={props => (
+            <MessageList
+            {...props}
+              user={user}
+              socket={socket}
+              channel={channel}
+              getPassphrase={getPassphrase}
+              handleChannelOpen={handleChannelOpen}
             />
+            )}
+            />
+            </Switch>
           </div>
-        </Switch>
+          
       </div>
     </React.Fragment>
   )
 }
 
-export default Messenger;
+export default Messenger

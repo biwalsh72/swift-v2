@@ -1,34 +1,30 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import styles from './Compose.module.css'
 import { getCurrentUser } from '../../../util/API'
 
-export default class Compose extends Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      message: ''
-    }
+const Compose = ({ submitMessage, isSecret }) => {
+  const [message, setMessage] = useState("")
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  function handleChange ({ target }) {
+    setMessage(target.value);
   }
 
-  handleChange (event) {
-    this.setState({ message: event.target.value });
-  }
-
-  handleSubmit (e) {
+  function handleSubmit (e) {
     e.preventDefault();
     if (message.trim() === "") return;
-    this.setState({ message: '' });
+    submitMessage(message)
+
+    setMessage("");
   }
 
-  render () {
+  const inputPlaceHolder = isSecret ? "Private Channel - Encrypted" : "Global Channel - Plain Text"
+
     return (
       <div className={styles['compose']}>
         <form className={styles.composeForm} onSubmit={this.handleSubmit}>
           <input
             type='text'
+            data-tip={inputPlaceHolder}
             className={styles.composeInput}
             placeholder={`Type a message, ${this.props.currentUser.name}`}
             maxLength="500"
@@ -41,5 +37,6 @@ export default class Compose extends Component {
         {this.props.rightItems}
       </div>
     )
-  }
 }
+
+export default Compose

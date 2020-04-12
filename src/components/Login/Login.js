@@ -149,4 +149,4 @@ const Login = ({ history }) => {
   )
 }
 
-export default withRouter(Login)
+export default Login

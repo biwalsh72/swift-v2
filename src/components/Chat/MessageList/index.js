@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Compose from '../Compose'
 import Toolbar from '../Toolbar'
 import ToolbarButton from '../ToolbarButton'
-import Message from '../Message'
+import Message from '../Message/ChatBubble'
 import moment from 'moment'
 import { IonIcon } from '@ionic/react'
 import { camera } from 'ionicons/icons'
@@ -17,11 +17,8 @@ import styles from './MessageList.css'
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
 
-const MY_USER_ID = 'apple'
-
-const MessageList = ({ user, socket, match, getPassphrase, handleChannelOpen }) => {
+const MessageList = ({ user, socket, channel, getPassphrase, handleChannelOpen }) => {
   const [chats, setChats] = useState([])
-  const channel = match.params.channel
   const isSecret = channel !== 'global'
   const passphrase = isSecret && getPassphrase()
   const limit = isSecret ? 100 : 1000

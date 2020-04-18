@@ -12,7 +12,7 @@ import validate from './validateLoginForm'
 import { authUser, checkUsername } from '../../services/userService'
 import useForm from '../common/useForm';
 
-const UserForm = ({ label, onSubmit, validate }) => {
+const LoginForm = ({ onSubmit, validate }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const { values, errors, handleChange, handleSubmit } = useForm(
@@ -145,7 +145,7 @@ const Login = ({ history }) => {
   }
 
   return (
-    <UserForm label="Login" onSubmit={handleSubmit} validate={validate} />
+    <LoginForm onSubmit={handleSubmit} validate={validate} />
   )
 }
 

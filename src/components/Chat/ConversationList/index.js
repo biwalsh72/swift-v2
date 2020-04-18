@@ -23,7 +23,7 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
                 username: { $regex: `${search}.*`, $options: 'i' }
               },
               {
-                CancelToken: source.token
+                cancelToken: source.token
               }
             )
           : await getOnlineUsers()
@@ -36,8 +36,6 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
 
     if (user) getUsers()
 
-    console.log(users)
-
     return () => {
       console.log('Cleaning...')
       source.cancel()
@@ -49,7 +47,7 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
     return await searchUsers(
       { status: { $ne: '' } },
       {
-        CancelToken: source.token
+        cancelToken: source.token
       }
     )
   }
@@ -74,7 +72,7 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
   }
 
   function populateUsers () {
-    if (!users) return console.log('Noone is online...')
+    if (!users) return <p>No one is online...</p>
 
     return users.map(
       _user =>
@@ -102,7 +100,7 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
         <ConversationSearch />
         <div className={styles['conversation-list-item']}>
           <div className={styles['conversation-info']}>
-            <h3 className={styles['conversation-title']}>Note to Self</h3>
+            <h3 className={styles['conversation-title']}>Global</h3>
           </div>
         </div>
         {populateUsers()}

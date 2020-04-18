@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import styles from './Compose.module.css'
-import { getCurrentUser } from '../../../util/API'
 
-const Compose = ({ submitMessage, isSecret }) => {
+const Compose = ({ submitMessage, isSecret, rightItems }) => {
   const [message, setMessage] = useState("")
 
   function handleChange ({ target }) {
@@ -21,20 +20,20 @@ const Compose = ({ submitMessage, isSecret }) => {
 
     return (
       <div className={styles['compose']}>
-        <form className={styles.composeForm} onSubmit={this.handleSubmit}>
+        <form className={styles.composeForm} onSubmit={handleSubmit}>
           <input
             type='text'
             data-tip={inputPlaceHolder}
             className={styles.composeInput}
-            placeholder={`Type a message, ${this.props.currentUser.name}`}
+            placeholder={`Type a message here...`}
             maxLength="500"
             autoFocus
             required
-            onChange={this.handleChange}
-            value={this.state.message}
+            onChange={handleChange}
+            value={message}
           />
         </form>
-        {this.props.rightItems}
+        {rightItems}
       </div>
     )
 }

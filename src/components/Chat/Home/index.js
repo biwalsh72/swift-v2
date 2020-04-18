@@ -10,10 +10,12 @@ export default class Home extends Component {
     super(props)
   }
 
+  /*<Messenger />*/
+
   render () {
     return (
       <div className='App'>
-        <Messenger currentUser={this.props.currentUser}/>
+        <Messenger />
       </div>
     )
   }

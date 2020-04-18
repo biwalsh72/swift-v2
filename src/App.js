@@ -8,10 +8,6 @@ import {
   useParams
 } from 'react-router-dom'
 
-import { getCurrentUser } from './util/API'
-import { ACCESS_TOKEN } from './constants'
-import OAuth2RedirectHandler from './util/oauth2/OAuth2RedirectHandler'
-
 import PrivateRoute from './components/common/PrivateRoute'
 import Landing from './components/Landing/Landing'
 import Login from './components/Login/Login'

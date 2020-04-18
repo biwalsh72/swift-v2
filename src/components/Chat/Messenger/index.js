@@ -126,8 +126,6 @@ const Messenger = ({ history, location }) => {
     localStorage.setItem('chatmate', user.username)
 
     setChannel(channelId)
-
-    history.push('/chat/ch/' + channelId)
   }
 
   function getChannelId (currUser, user) {
@@ -162,31 +160,23 @@ const Messenger = ({ history, location }) => {
           ]}
         /> */}
 
-          <div className={[styles['scrollable'], styles['sidebar']].join(' ')}>
-            <ConversationList
-              user={user}
-              socket={socket}
-              handleChannelOpen={handleChannelOpen}
-            />
-          </div>
+        <div className={[styles['scrollable'], styles['sidebar']].join(' ')}>
+          <ConversationList
+            user={user}
+            socket={socket}
+            handleChannelOpen={handleChannelOpen}
+          />
+        </div>
 
-          <div className={[styles['scrollable'], styles['content']].join(' ')}>
-          <Switch>
-          <Route path='/chat/ch/:channel'
-          render={props => (
-            <MessageList
-            {...props}
-              user={user}
-              socket={socket}
-              channel={channel}
-              getPassphrase={getPassphrase}
-              handleChannelOpen={handleChannelOpen}
-            />
-            )}
-            />
-            </Switch>
-          </div>
-          
+        <div className={[styles['scrollable'], styles['content']].join(' ')}>
+          <MessageList
+            user={user}
+            socket={socket}
+            channel={channel}
+            getPassphrase={getPassphrase}
+            handleChannelOpen={handleChannelOpen}
+          />
+        </div>
       </div>
     </React.Fragment>
   )

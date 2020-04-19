@@ -1,18 +1,35 @@
-import React, {useEffect} from 'react';
-import shave from 'shave';
+import React, { useEffect } from 'react'
+import shave from 'shave'
+import styled from 'styled-components'
 
-import styles from './ConversationListItem.module.css';
+import styles from './ConversationListItem.module.css'
 
-export default function ConversationListItem({user, currUser, handleChannelOpen}) {
+const Status = styled.div`
+  margin: auto;
+  height: 3vh;
+  font-size: 14px;
+  color: ${({ isOnline }) => (isOnline ? '#000' : '#7e7e7e')};
+`
+
+const ConversationListItem = ({
+  user,
+  currUser,
+  handleChannelOpen
+}) => {
   useEffect(() => {
-    shave('.conversation-snippet', 20);
+    shave('.conversation-snippet', 20)
   })
 
-    return (
-      <div className={styles["conversation-list-item"]}>
-        <i className={styles.userName} 
-        onClick={() => handleChannelOpen(currUser, user)}/>{" "}
-        <b>{user.username}</b>
-      </div>
-    );
+  return (
+    <div className={styles['conversation-list-item']} onClick={() => handleChannelOpen(currUser, user)}>
+      <Status
+        className={styles['conversation-title']}
+        isOnline={Boolean(user.status)}
+        onClick={() => handleChannelOpen(currUser, user)}
+      />{' '}
+      <p className={styles['conversation-title']}>{user.username}</p>
+    </div>
+  )
 }
+
+export default ConversationListItem

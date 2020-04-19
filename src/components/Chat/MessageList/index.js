@@ -17,7 +17,13 @@ import styles from './MessageList.css'
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
 
-const MessageList = ({ user, socket, channel, getPassphrase, handleChannelOpen }) => {
+const MessageList = ({
+  user,
+  socket,
+  channel,
+  getPassphrase,
+  handleChannelOpen
+}) => {
   const [chats, setChats] = useState([])
   const isSecret = channel !== 'global'
   const passphrase = isSecret && getPassphrase()
@@ -106,45 +112,45 @@ const MessageList = ({ user, socket, channel, getPassphrase, handleChannelOpen }
     // console.log("submtMessage: ", chatMsg);
   }
 
-  function encryptMsg(msgObj, passphrase) {
+  function encryptMsg (msgObj, passphrase) {
     for (let k in msgObj) {
       msgObj[k] = AES.encrypt(msgObj[k], passphrase).toString()
     }
 
     msgObj['channel'] = channel
-    msgObj['recieverPbkHash'] = SHA256(localStorage.getItem('chatmate_pbk')).toString()
-    msgObj['senderPbkHash'] = user.pbkHash;
+    msgObj['recieverPbkHash'] = SHA256(
+      localStorage.getItem('chatmate_pbk')
+    ).toString()
+    msgObj['senderPbkHash'] = user.pbkHash
     msgObj['seen'] = false
 
     return msgObj
   }
 
-  function updateScroll() {
-    const chatbox = document.getElementById("message-list")
+  function updateScroll () {
+    const chatbox = document.getElementById(styles['message-list-container'])
     if (chatbox) chatbox.scrollTop = chatbox.scrollHeight
   }
 
-  function populateChatBox() {
-    let prevMsg = null;
+  function populateChatBox () {
+    let prevMsg = null
     return chats.length === 0 ? (
       <p>No messages yet. Say hello!</p>
     ) : (
       chats.map(msgObj => {
         const chatBubble = (
           <Message
-          key={chats.indexOf(msgObj)}
-          currUser={user}
-          passphrase={passphrase}
-          isSecret={isSecret}
-          msgObj={msgObj}
-          prevMsg={prevMsg}
-          decryptMsg={decryptMsg}
-          handleChannelOpen={handleChannelOpen}
+            key={chats.indexOf(msgObj)}
+            currUser={user}
+            passphrase={passphrase}
+            isSecret={isSecret}
+            msgObj={msgObj}
+            prevMsg={prevMsg}
+            decryptMsg={decryptMsg}
+            handleChannelOpen={handleChannelOpen}
           />
         )
-
         prevMsg = msgObj
-
         return chatBubble
       })
     )
@@ -154,7 +160,7 @@ const MessageList = ({ user, socket, channel, getPassphrase, handleChannelOpen }
     <div className={styles.scrollbar}>
       <div className={styles['message-list']}>
         <Toolbar
-          title='Recipient'
+          title={channel === 'global' ? 'Global Chat' : user.username}
           rightItems={[
             <ToolbarButton
               key='info'
@@ -165,12 +171,13 @@ const MessageList = ({ user, socket, channel, getPassphrase, handleChannelOpen }
           ]}
         />
 
-            <div className={styles['message-list-container']}>
-              {populateChatBox()}
-            </div>
+        <div className={styles['message-list-container']}>
+          {populateChatBox()}
+        </div>
 
         <Compose
-          submitMessage={submitMessage} isSecret={isSecret}
+          submitMessage={submitMessage}
+          isSecret={isSecret}
           rightItems={[
             <ToolbarButton key='photo'>
               <IonIcon icon={camera} />

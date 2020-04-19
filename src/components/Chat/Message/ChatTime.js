@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './Message.module.css'
+import styles from './Message.css'
 
 const Timestamp = ({ isSecret, decrypted, timestamp, seen, sentByUser }) => {
   const getTimestamp = () => {
@@ -47,15 +47,16 @@ const Timestamp = ({ isSecret, decrypted, timestamp, seen, sentByUser }) => {
   }
 
   function displaySeenStatus () {
-      return seen ? <p>👁‍🗨</p> : <p>✓</p>;
+    return seen ? <p>👁‍🗨</p> : <p>✓</p>
   }
 
   return (
+    <div className={styles.message}>
       <div className={styles['timestamp']}>
-          {sentByUser || displaySeenStatus()} {" "}
-          {getTimestamp()} {" "}
-          {sentByUser && displaySeenStatus()}
+        {sentByUser || displaySeenStatus()} {getTimestamp()}{' '}
+        {sentByUser && displaySeenStatus()}
       </div>
+    </div>
   )
 }
 

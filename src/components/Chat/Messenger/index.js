@@ -121,6 +121,8 @@ const Messenger = ({ history, location }) => {
 
   function handleChannelOpen (currUser, user) {
     const channelId = getChannelId(currUser, user)
+    console.log('running')
+    console.log(channelId);
 
     localStorage.setItem('chatmate_pbk', user.publicKey)
     localStorage.setItem('chatmate', user.username)

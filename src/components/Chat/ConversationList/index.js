@@ -72,19 +72,22 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
   }
 
   function populateUsers () {
-    if (!users) return <p>No one is online...</p>
-
-    return users.map(
-      _user =>
-        _user.username !== user.username && (
-          <ConversationListItem
-            key={users.indexOf(_user)}
-            user={_user}
-            currUser={user}
-            handleChannelOpen={handleChannelOpen}
-          />
-        )
-    )
+    console.log(users)
+    if (!users) {
+      return (<ConversationListItem key='none'>No one is online...</ConversationListItem>)
+    } else {
+      return users.map(
+        _user =>
+          _user.username !== user.username && (
+            <ConversationListItem
+              key={users.indexOf(_user)}
+              user={_user}
+              currUser={user}
+              handleChannelOpen={handleChannelOpen}
+            />
+          )
+      )
+    }
   }
 
   return (
@@ -98,11 +101,6 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
           ]}
         />
         <ConversationSearch />
-        <div className={styles['conversation-list-item']}>
-          <div className={styles['conversation-info']}>
-            <h3 className={styles['conversation-title']}>Global</h3>
-          </div>
-        </div>
         {populateUsers()}
       </div>
     </div>

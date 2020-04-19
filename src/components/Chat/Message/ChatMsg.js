@@ -1,14 +1,20 @@
-import React from 'react';
-import styles from './Message.module.css'
+import React from 'react'
+import styles from './Message.css'
 
-const ChatMsg = ({ isSecret, decrypted, message, ...rest }) => {
-    function displayMessage() {
-      if (isSecret) if (!decrypted) return <p>🔒</p>;
-  
-      return message;
-    }
-  
-    return <div className={styles.message} {...rest}>{displayMessage()}</div>;
-  };
-  
-  export default ChatMsg;
+const ChatMsg = ({ sentbyUser, isSecret, decrypted, message, ...rest }) => {
+  function displayMessage () {
+    if (isSecret) if (!decrypted) return <p className={styles.encrypted}>🔒</p>
+
+    return message
+  }
+
+  return (
+    <div className={styles['bubble-container']} {...rest}>
+    <div className={styles.bubble}>
+      {displayMessage()}
+      </div>
+    </div>
+  )
+}
+
+export default ChatMsg

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import moment from 'moment'
-import styles from './Message.module.css'
-import styled from 'styled-components'
+import styles from './Message.css'
+import styled, { css } from 'styled-components'
 import CryptoJS from 'crypto-js'
 import { getUser } from '../../../services/userService'
 import ChatMsg from './ChatMsg'
@@ -12,6 +11,11 @@ const { AES } = CryptoJS
 const SenderName = styled.div`
   font-weight: bold;
   font-size: 12px;
+
+  ${({ you }) => you && 
+  css`
+    margin-left: auto;
+  `}
 
   &:hover {
     cursor: pointer;
@@ -65,18 +69,17 @@ const Message = ({
     } else setShowTimestamp(!showTimestamp)
   }
 
-  async function handleSenderClick () {
-    const { data: user } = await getUser({ username: name }, {})
-    handleChannelOpen(currUser, user)
-  }
-
   return (
-    <div className={styles['bubble-container']}>
-      <div className={styles.bubble} onClick={handleSenderClick}>
-        <SenderName onClick={handleSenderClick}>
-          {prevSentByUser() || displayName}
-        </SenderName>
+    <div
+      className={[
+        styles['message'],
+        `${displayName === 'You' ? styles.mine : ''}`
+      ].join(' ')}
+    >
+      <SenderName you={name === currUser.username}>{prevSentByUser() || displayName}</SenderName>
+      <div className={styles.bubble}>
         <ChatMsg
+          sentbyUser={name === currUser.username}
           onClick={handleMsgClick}
           onMouseLeave={() => setTimeout(() => setShowTimestamp(false), 1250)}
           isSecret={isSecret}

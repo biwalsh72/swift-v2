@@ -16,7 +16,7 @@ const socket = openSocket(
   process.env.REACT_APP_SOCKET_ENDPOINT || 'http://localhost:4000'
 )
 
-const Messenger = ({ history, location }) => {
+const Messenger = () => {
   const [user, setUser] = useState({})
   const [channel, setChannel] = useState('global')
   const [isOnline, setIsOnline] = useState(true)

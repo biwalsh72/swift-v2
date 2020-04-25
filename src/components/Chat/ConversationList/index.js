@@ -5,6 +5,7 @@ import Toolbar from '../Toolbar'
 import ToolbarButton from '../ToolbarButton'
 import { searchUsers } from '../../../services/userService'
 import Axios from 'axios'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import styles from './ConversationList.css'
 
@@ -52,6 +53,12 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
     )
   }
 
+  const handleLogout = () => {
+    localStorage.clear();
+
+    window.location = "/";
+  };
+
   socket.on('user-connected', async _user => {
     if (users.find(u => u.username === _user.username) !== undefined) return
 
@@ -74,7 +81,7 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
   function populateUsers () {
     console.log(users)
     if (!users) {
-      return (<ConversationListItem key='none'>No one is online...</ConversationListItem>)
+      return (<p className={styles.noone} key='noneonline'>No one is online...</p>)
     } else {
       return users.map(
         _user =>
@@ -95,9 +102,9 @@ const ConversationList = ({ user, socket, handleChannelOpen }) => {
       <div className={styles['conversation-list']}>
         <Toolbar
           title='Conversations'
-          leftItems={[<ToolbarButton key='cog' icon='ion-ios-cog' />]}
+          leftItems={[<ExitToAppIcon className={styles.icon} key='logout' style={{color: 'rgb(0, 153, 255)'}} onClick={handleLogout} />]}
           rightItems={[
-            <ToolbarButton key='add' icon='ion-ios-add-circle-outline' />
+            <p key='usersname' className={styles.usersname}>{user.username}</p>
           ]}
         />
         <ConversationSearch />

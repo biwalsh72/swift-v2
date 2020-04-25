@@ -6,7 +6,7 @@ const app = express()
 const cors = require('cors')
 const config = require('./config.json')
 const morgan = require('morgan')
-const server = require('http').Server(app)
+const server = require('http').createServer(app)
 const socket = require('socket.io')(server)
 const path = require('path')
 

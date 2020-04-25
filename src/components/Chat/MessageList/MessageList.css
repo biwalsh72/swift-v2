@@ -40,3 +40,25 @@
 
 /* set button(top and bottom of the scrollbar) */
 .scrollbar::-webkit-scrollbar-button {display:none}
+
+.icon {
+  margin-left: 1%;
+  margin-top: .4rem;
+  transition: .3s ease-in-out;
+}
+
+.icon:hover {
+  transform: scale(1.05);
+  cursor:pointer;
+}
+
+.topicon {
+  margin-left: 2%;
+  font-size: 12px;
+  transition: .3s ease-in-out;
+}
+
+.topicon:hover {
+  transform: scale(1.05);
+  cursor:pointer;
+}

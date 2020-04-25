@@ -3,12 +3,17 @@ import Compose from '../Compose'
 import Toolbar from '../Toolbar'
 import ToolbarButton from '../ToolbarButton'
 import Message from '../Message/ChatBubble'
-import moment from 'moment'
-import { IonIcon } from '@ionic/react'
-import { camera } from 'ionicons/icons'
 import Axios from 'axios'
 import { getChats, sendChat, seenChat } from '../../../services/chatService'
 import CryptoJS from 'crypto-js'
+
+import CameraAltIcon from '@material-ui/icons/CameraAlt'
+import ImageIcon from '@material-ui/icons/Image'
+import MicIcon from '@material-ui/icons/Mic'
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions'
+import VideocamIcon from '@material-ui/icons/Videocam'
+import PhoneIcon from '@material-ui/icons/Phone'
+import InfoIcon from '@material-ui/icons/Info'
 
 const { AES, SHA256 } = CryptoJS
 
@@ -134,7 +139,7 @@ const MessageList = ({
 
   function populateChatBox () {
     let prevMsg = null
-    return chats.length === 0 ? (
+    return chats && chats.length === 0 ? (
       <p>No messages yet. Say hello!</p>
     ) : (
       chats.map(msgObj => {
@@ -162,12 +167,21 @@ const MessageList = ({
         <Toolbar
           title={channel === 'global' ? 'Global Chat' : user.username}
           rightItems={[
-            <ToolbarButton
+            <InfoIcon
+              className={styles.topicon}
               key='info'
-              icon='ion-ios-information-circle-outline'
+              style={{ color: 'rgb(0, 153, 255)' }}
             />,
-            <ToolbarButton key='video' icon='ion-ios-videocam' />,
-            <ToolbarButton key='phone' icon='ion-ios-call' />
+            <VideocamIcon
+              key='video'
+              className={styles.topicon}
+              style={{ color: 'rgb(0, 153, 255)' }}
+            />,
+            <PhoneIcon
+              key='phone'
+              className={styles.topicon}
+              style={{ color: 'rgb(0, 153, 255)' }}
+            />
           ]}
         />
 
@@ -179,11 +193,26 @@ const MessageList = ({
           submitMessage={submitMessage}
           isSecret={isSecret}
           rightItems={[
-            <ToolbarButton key='photo'>
-              <IonIcon icon={camera} />
-            </ToolbarButton>,
-            <ToolbarButton key='image' ion-icon='image' />,
-            <ToolbarButton key='audio' icon='ion-ios-mic' />,
+            <EmojiEmotionsIcon
+              key='emojii'
+              className={styles.icon}
+              style={{ color: 'rgb(0, 153, 255)' }}
+            />,
+            <CameraAltIcon
+              key='camera'
+              className={styles.icon}
+              style={{ color: 'rgb(0, 153, 255)' }}
+            />,
+            <ImageIcon
+              key='image'
+              className={styles.icon}
+              style={{ color: 'rgb(0, 153, 255)' }}
+            />,
+            <MicIcon
+              key='mic'
+              className={styles.icon}
+              style={{ color: 'rgb(0, 153, 255)' }}
+            />,
             <ToolbarButton key='money' icon='ion-ios-card' />,
             <ToolbarButton key='games' icon='ion-logo-game-controller-b' />,
             <ToolbarButton key='emoji' icon='ion-ios-happy' />

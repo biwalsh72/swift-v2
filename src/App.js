@@ -2,10 +2,7 @@ import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
+  Route
 } from 'react-router-dom'
 
 import PrivateRoute from './components/common/PrivateRoute'

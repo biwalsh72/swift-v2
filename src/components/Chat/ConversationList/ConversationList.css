@@ -56,3 +56,20 @@
   font-weight: bold;
   margin: 0;
 }
+
+.icon {
+  transition: .3s ease-in-out;
+}
+
+.icon:hover {
+  transform: scale(1.05);
+  cursor:pointer;
+}
+
+.usersname {
+  margin: 0;
+}
+
+.noone {
+  align-self: center;
+}

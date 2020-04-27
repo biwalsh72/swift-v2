@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
 import ConversationList from '../ConversationList'
 import MessageList from '../MessageList'
 import styles from './Messenger.module.css'
 import openSocket from 'socket.io-client'
-import Toolbar from '../Toolbar'
-import ToolbarButton from '../ToolbarButton'
-import { cog } from 'ionicons/icons'
 import Axios from 'axios'
 import crypto from 'crypto'
 import { MD5 } from 'crypto-js'
@@ -143,24 +139,6 @@ const Messenger = () => {
   return (
     <React.Fragment>
       <div className={styles['messenger']}>
-        {/* <Toolbar
-          title="Conversations"
-          leftItems={[
-            <ToolbarButton key="cog" icon={ cog } />
-          ]}
-          rightItems={[
-            <ToolbarButton key="add" icon="ion-ios-add-circle-outline" />
-          ]}
-        /> */}
-
-        {/*<Toolbar
-          title="Conversation Title"
-          rightItems={[
-            <ToolbarButton key="info" icon="ion-ios-information-circle-outline" />,
-            <ToolbarButton key="video" icon="ion-ios-videocam" />,
-            <ToolbarButton key="phone" icon="ion-ios-call" />
-          ]}
-        /> */}
 
         <div className={[styles['scrollable'], styles['sidebar']].join(' ')}>
           <ConversationList

@@ -76,4 +76,4 @@ typings/
 .fusebox/
 
 # For MongoDB database config
-config.json
+# config.json

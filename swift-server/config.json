@@ -1,0 +1,5 @@
+{
+    "name": "Swift",
+    "jwtKey": "yQueyqw3qaSehr21ksWQEWQS421s",
+    "MONGODB_URI": "mongodb+srv://biwalsh72:EgGob93t9XpOsOci@cluster0-ujmje.mongodb.net/Swift?retryWrites=true&w=majority"
+}

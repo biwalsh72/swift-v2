@@ -3,7 +3,7 @@
 import http from './httpService'
 
 const apiEndpoint =
-  process.env.REACT_APP_SERVICE_API || 'https://swift-web-chat.herokuapp.com/api'
+  process.env.REACT_APP_SERVICE_API || 'http://localhost:4000/api'
 const serviceEndpoint = apiEndpoint + '/users'
 
 export const searchUsers = async (searchData, config) => {

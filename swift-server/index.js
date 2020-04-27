@@ -13,10 +13,7 @@ const path = require('path')
 // Middlewares
 app.use(morgan('tiny'))
 app.use(express.json())
-app.use(cors({
-  credentials: true,
-  origin: "http://localhost:3000"
-}));
+app.use(cors());
 
 const socketConnection = require('./socket')
 mongoose

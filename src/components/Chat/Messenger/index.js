@@ -9,7 +9,7 @@ import { MD5 } from 'crypto-js'
 import { getUserProfile, updateUser } from '../../../services/userService'
 
 const socket = openSocket(
-  process.env.REACT_APP_SOCKET_ENDPOINT || 'http://localhost:4000'
+  process.env.REACT_APP_SOCKET_ENDPOINT || 'https://swift-web-chat.herokuapp.com/'
 )
 
 const Messenger = () => {

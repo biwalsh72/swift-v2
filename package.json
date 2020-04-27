@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server/index.js",
+    "start": "node server/index.js",
+    "build": "webpack --mode production",
+    "heroku-postbuild": "webpack --mode production",
     "server": "node swift-server/index.js",
     "dev": "webpack-dev-server --open --mode development",
-    "build": "webpack --mode production",
-    "heroku-postbuild": "yarn build",
-    "build-start": "yarn && yarn build && export NODE-ENV=production && nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "MIT",

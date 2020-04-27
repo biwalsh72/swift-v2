@@ -9,6 +9,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 import styles from './ConversationList.css'
 
+Axios.defaults.withCredentials = true
+
 const ConversationList = ({ user, socket, handleChannelOpen }) => {
   const [users, setUsers] = useState([])
   const [search, setSearch] = useState('')

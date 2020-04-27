@@ -17,6 +17,8 @@ import InfoIcon from '@material-ui/icons/Info'
 
 const { AES, SHA256 } = CryptoJS
 
+Axios.defaults.withCredentials = true
+
 import styles from './MessageList.css'
 
 /* Core CSS required for Ionic components to work properly */
